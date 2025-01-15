@@ -1,0 +1,15 @@
+server:
+  port: 8080
+databases:
+  - user: admin
+    password: admin
+    host: localhost
+    dbName: Shop
+  - user: admin
+    password: admin
+    host: localhost
+    dbName: Shop2
+
+security:
+  jwt:
+    key: abc123
