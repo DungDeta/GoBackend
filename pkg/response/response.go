@@ -19,10 +19,10 @@ func SuccessResponse(c *gin.Context, code int, data interface{}) {
 
 }
 
-func ErrorResponse(c *gin.Context, code int) {
+func ErrorResponse(c *gin.Context, code int, data interface{}) {
 	c.JSON(200, ResponseData{
 		Code: code,
 		Msg:  msg[code],
-		Data: nil,
+		Data: data,
 	})
 }

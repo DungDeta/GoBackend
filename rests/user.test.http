@@ -1,0 +1,8 @@
+POST http://localhost:8080/v1/2024/user/register
+Content-Type: application/json
+
+{
+  "verify_key": "test@gmail.com",
+  "verify_purpose": "test",
+  "verify_type": 1
+}

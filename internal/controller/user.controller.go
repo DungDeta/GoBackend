@@ -1,22 +1,31 @@
 package controller
 
 import (
+	"fmt"
+
 	"github.com/gin-gonic/gin"
 	"myproject/internal/service"
+	"myproject/internal/vo"
 	"myproject/pkg/response"
 )
 
 type UserController struct {
-	userService *service.UserService
+	userService service.IUserService
 }
 
-func NewUserController() *UserController {
+func NewUserController(userService service.IUserService) *UserController {
 	return &UserController{
-		userService: service.NewUserService(),
+		userService: userService,
 	}
 }
+func (uc *UserController) Register(c *gin.Context) {
+	var params vo.UserRegistratorRequest
+	if err := c.ShouldBindJSON(&params); err != nil {
+		response.ErrorResponse(c, response.ErrCodeParamInvalid, err.Error())
+		return
+	}
+	fmt.Println(params)
 
-// UserGetByID controller -> service -> repo -> models -> db
-func (u *UserController) UserGetByID(c *gin.Context) {
-	response.SuccessResponse(c, 20001, []string{"user1", "user2"})
+	res := uc.userService.Register(params.Email, params.Purpose)
+	response.SuccessResponse(c, response.ErrCodeSuccess, res)
 }
