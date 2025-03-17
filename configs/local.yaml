@@ -2,7 +2,7 @@ server:
   port: 8082
   mode: "dev"
 mysql:
-  host: 127.0.0.1
+  host: pi.local
   port: 33306
   username: root
   password: root1234
@@ -18,7 +18,7 @@ logger:
   max_size: 1024
   compress: true
 redis:
-  host: 127.0.0.1
+  host: pi.local
   port: 6331
   password:
   database: 0

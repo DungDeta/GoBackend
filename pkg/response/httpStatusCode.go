@@ -11,13 +11,23 @@ const (
 	ErrSendEmail     = 50001
 
 	ErrCodeOtpNotExisted = 60001
+
+	ErrNotVerify = 60002
+
+	ErrCodeLoginFail              = 70001
+	ErrCodeTwoFactorAuthSetupFail = 70002
+	ErrCodeTwoFactorAuthFail      = 70003
 )
 
 var msg = map[int]string{
-	ErrCodeSuccess:      "Success",
-	ErrCodeParamInvalid: "Email is invalid",
-	ErrTokenInvalid:     "Token is invalid",
-	ErrInvalidOTP:       "OTP is invalid",
-	ErrCodeUserExist:    "User is exist",
-	ErrSendEmail:        "Send email error",
+	ErrCodeSuccess:                "Success",
+	ErrCodeParamInvalid:           "Email is invalid",
+	ErrTokenInvalid:               "Token is invalid",
+	ErrInvalidOTP:                 "OTP is invalid",
+	ErrCodeUserExist:              "User is exist",
+	ErrSendEmail:                  "Send email error",
+	ErrCodeOtpNotExisted:          "Otp not existed",
+	ErrNotVerify:                  "Account not verified",
+	ErrCodeLoginFail:              "Login fail",
+	ErrCodeTwoFactorAuthSetupFail: "Two factor auth setup fail",
 }

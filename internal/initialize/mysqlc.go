@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"time"
 
+	_ "github.com/go-sql-driver/mysql" // Import the MySQL driver
 	"go.uber.org/zap"
 	"myproject/global"
 )
@@ -34,7 +35,6 @@ func SetPoolc() {
 	sqlDB.SetMaxIdleConns(m.MaxIdleConns)                      // Số lượng kết nối tối đa được giữa 2 lần sử dụng
 	sqlDB.SetMaxOpenConns(m.MaxOpenConns)                      // Số lượng kết nối tối đa được mở
 	sqlDB.SetConnMaxLifetime(time.Duration(m.ConnMaxLifetime)) // Thời gian tối đa mà một kết nối có thể được sử dụng
-
 }
 
 func migrateTablesc() {

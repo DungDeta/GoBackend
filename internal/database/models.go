@@ -6,7 +6,53 @@ package database
 
 import (
 	"database/sql"
+	"database/sql/driver"
+	"fmt"
+	"time"
 )
+
+type PreGoAccUserTwoFactor9999TwoFactorAuthType string
+
+const (
+	PreGoAccUserTwoFactor9999TwoFactorAuthTypeSMS   PreGoAccUserTwoFactor9999TwoFactorAuthType = "SMS"
+	PreGoAccUserTwoFactor9999TwoFactorAuthTypeEMAIL PreGoAccUserTwoFactor9999TwoFactorAuthType = "EMAIL"
+	PreGoAccUserTwoFactor9999TwoFactorAuthTypeAPP   PreGoAccUserTwoFactor9999TwoFactorAuthType = "APP"
+)
+
+func (e *PreGoAccUserTwoFactor9999TwoFactorAuthType) Scan(src interface{}) error {
+	switch s := src.(type) {
+	case []byte:
+		*e = PreGoAccUserTwoFactor9999TwoFactorAuthType(s)
+	case string:
+		*e = PreGoAccUserTwoFactor9999TwoFactorAuthType(s)
+	default:
+		return fmt.Errorf("unsupported scan type for PreGoAccUserTwoFactor9999TwoFactorAuthType: %T", src)
+	}
+	return nil
+}
+
+type NullPreGoAccUserTwoFactor9999TwoFactorAuthType struct {
+	PreGoAccUserTwoFactor9999TwoFactorAuthType PreGoAccUserTwoFactor9999TwoFactorAuthType
+	Valid                                      bool // Valid is true if PreGoAccUserTwoFactor9999TwoFactorAuthType is not NULL
+}
+
+// Scan implements the Scanner interface.
+func (ns *NullPreGoAccUserTwoFactor9999TwoFactorAuthType) Scan(value interface{}) error {
+	if value == nil {
+		ns.PreGoAccUserTwoFactor9999TwoFactorAuthType, ns.Valid = "", false
+		return nil
+	}
+	ns.Valid = true
+	return ns.PreGoAccUserTwoFactor9999TwoFactorAuthType.Scan(value)
+}
+
+// Value implements the driver Valuer interface.
+func (ns NullPreGoAccUserTwoFactor9999TwoFactorAuthType) Value() (driver.Value, error) {
+	if !ns.Valid {
+		return nil, nil
+	}
+	return string(ns.PreGoAccUserTwoFactor9999TwoFactorAuthType), nil
+}
 
 // User information table
 type PreGoAccUser9999 struct {
@@ -47,6 +93,49 @@ type PreGoAccUserBase9999 struct {
 	UserLoginIp    sql.NullString
 	UserCreatedAt  sql.NullTime
 	UserUpdatedAt  sql.NullTime
+	// authentication is enabled for the user
+	IsTwoFactorEnabled sql.NullInt32
+}
+
+// pre_go_acc_user_info_9999
+type PreGoAccUserInfo9999 struct {
+	// User ID
+	UserID uint64
+	// User account
+	UserAccount string
+	// User nickname
+	UserNickname sql.NullString
+	// User avatar
+	UserAvatar sql.NullString
+	// User state: 0-Locked, 1-Activated, 2-Not Activated
+	UserState uint8
+	// Mobile phone number
+	UserMobile sql.NullString
+	// User gender: 0-Secret, 1-Male, 2-Female
+	UserGender sql.NullInt16
+	// User birthday
+	UserBirthday sql.NullTime
+	// User email address
+	UserEmail sql.NullString
+	// Authentication status: 0-Not Authenticated, 1-Pending, 2-Authenticated, 3-Failed
+	UserIsAuthentication uint8
+	// Record creation time
+	CreatedAt sql.NullTime
+	// Record update time
+	UpdatedAt sql.NullTime
+}
+
+// pre_go_acc_user_two_factor_9999
+type PreGoAccUserTwoFactor9999 struct {
+	TwoFactorID         uint32
+	UserID              uint32
+	TwoFactorAuthType   PreGoAccUserTwoFactor9999TwoFactorAuthType
+	TwoFactorAuthSecret string
+	TwoFactorPhone      sql.NullString
+	TwoFactorEmail      sql.NullString
+	TwoFactorIsActive   bool
+	TwoFactorCreatedAt  sql.NullTime
+	TwoFactorUpdatedAt  sql.NullTime
 }
 
 // account_user_verify
@@ -60,4 +149,32 @@ type PreGoAccUserVerify9999 struct {
 	IsDeleted       sql.NullInt32
 	VerifyCreatedAt sql.NullTime
 	VerifyUpdatedAt sql.NullTime
+}
+
+type Ticket struct {
+	ID          int64
+	Name        string
+	Description sql.NullString
+	StartTime   time.Time
+	EndTime     time.Time
+	Status      int32
+	CreatedAt   time.Time
+	UpdatedAt   time.Time
+}
+
+type TicketItem struct {
+	ID              int64
+	Name            string
+	Description     sql.NullString
+	StockInitial    int32
+	StockAvailable  int32
+	IsStockPrepared bool
+	PriceOriginal   int64
+	PriceFlash      int64
+	SaleStartTime   time.Time
+	SaleEndTime     time.Time
+	Status          int32
+	ActivityID      int64
+	CreatedAt       time.Time
+	UpdatedAt       time.Time
 }

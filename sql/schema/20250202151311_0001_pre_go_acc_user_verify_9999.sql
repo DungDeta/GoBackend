@@ -10,14 +10,14 @@ CREATE TABLE `pre_go_acc_user_verify_9999`
     `verify_otp`        varchar(6)   NOT NULL,
     `verify_key`        varchar(255) NOT NULL,
     `verify_key_hash`   varchar(255) NOT NULL,
-    `verify_type`       int               DEFAULT 1,
-    `is_verified`       int               DEFAULT 0,
-    `is_deleted`        int               DEFAULT 0,
-    `verify_created_at` timestamp    NULL DEFAULT CURRENT_TIMESTAMP,
-    `verify_updated_at` timestamp    NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `verify_type`       int DEFAULT 1,
+    `is_verified`       int DEFAULT 0,
+    `is_deleted`        int DEFAULT 0,
+    `verify_created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+    `verify_updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`verify_id`),
     UNIQUE KEY `unique_verify_key` (`verify_key`),
-    KEY `idx_verify_otp` (`verify_otp`)
+    KEY                 `idx_verify_otp` (`verify_otp`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 3
   DEFAULT CHARSET = utf8mb4

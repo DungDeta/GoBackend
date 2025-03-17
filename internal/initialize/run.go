@@ -16,8 +16,4 @@ func Run() *gin.Engine {
 	InitKafka()
 	r := InitRouter()
 	return r
-	// err := r.Run(":8080")
-	// if err != nil {
-	// 	return nil
-	// }
 }

@@ -1,7 +1,0 @@
-{"level":"INFO","Time":"2025-01-15T04:28:50.893+0700","msg":"Info log ","line":1}
-{"level":"INFO","Time":"2025-01-15T04:29:28.518+0700","msg":"Info log ","line":1}
-{"level":"INFO","Time":"2025-01-15T04:29:28.519+0700","msg":"Info log ","line":2}
-{"level":"INFO","Time":"2025-01-15T04:30:12.500+0700","msg":"Info log ","line":1}
-{"level":"INFO","Time":"2025-01-15T04:30:12.501+0700","msg":"Info log ","line":2}
-{"level":"INFO","Time":"2025-01-15T04:30:34.810+0700","caller":"cli/main.log.go:28","msg":"Info log ","line":1}
-{"level":"INFO","Time":"2025-01-15T04:30:34.811+0700","caller":"cli/main.log.go:29","msg":"Info log ","line":2}
